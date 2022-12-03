@@ -60,7 +60,7 @@ struct day2 {
         hinttoscore['Y'] = 3;
         hinttoscore['Z'] = 6;
         auto desiredscore= hinttoscore[player2hint];
-        char ret;
+        char ret = 'l';
         for (auto move: moves){
             auto score = winscore(player1, move);
             if (score==desiredscore){

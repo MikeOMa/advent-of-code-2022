@@ -24,5 +24,7 @@ build: $(TARGET)
 run:
 	./$(TARGET)
 
+rerun: clean all run
+
 clean:
 	rm -f $(OBJS) $(TARGET) 
