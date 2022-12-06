@@ -3,9 +3,9 @@
 #include"day1.hpp"
 #include"day2.hpp"
 #include"day3.hpp"
-/*#include"day4.hpp"
+#include"day4.hpp"
 #include"day5.hpp"
-#include"day6.hpp"
+/*#include"day6.hpp"
 #include"day7.hpp"
 #include"day8.hpp"
 #include"day9.hpp"
@@ -33,9 +33,9 @@ int main(void) {
 	{day1 d;d.firstStar();d.secondStar();}
     {day2 d;d.firstStar();d.secondStar();}
 	{day3 d;d.firstStar();d.secondStar();}
-	/*{day4 d;d.firstStar();d.secondStar();}
+	{day4 d;d.firstStar();d.secondStar();}
 	{day5 d;d.firstStar();d.secondStar();}
-	{day6 d;d.firstStar();d.secondStar();}
+	/*{day6 d;d.firstStar();d.secondStar();}
 	{day7 d;d.firstStar();d.secondStar();}
 	{day8 d;d.firstStar();d.secondStar();}
 	{day9 d;d.firstStar();d.secondStar();}

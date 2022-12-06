@@ -26,5 +26,8 @@ run:
 
 rerun: clean all run
 
+time-rerun:
+	time make rerun
+
 clean:
 	rm -f $(OBJS) $(TARGET) 
