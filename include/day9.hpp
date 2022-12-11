@@ -91,7 +91,7 @@ struct day9 {
         positions.insert(locToString(tailLoc));
       }
     }
-    std::cout << "Third day of Christmas: " << positions.size() << std::endl;
+    std::cout << "Ninth day of Christmas: " << positions.size() << std::endl;
   }
 
   void secondStar() {
