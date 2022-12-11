@@ -1,36 +1,37 @@
 #ifndef DBMW_INCLUDE_UTIL_HPP_
 #define DBMW_INCLUDE_UTIL_HPP_
 
-#include<fstream>
-#include<string>
-#include<vector>
-#include<functional>
-#include<map>
-#include<iostream>
-#include<queue>
+#include <fstream>
+#include <functional>
+#include <iostream>
+#include <map>
+#include <queue>
+#include <string>
+#include <vector>
 
 using namespace std;
 
-struct fiterator{
+struct fiterator {
 
-	struct _iter{
-		fiterator *src;
+  struct _iter {
+    fiterator *src;
 
-		std::string operator*() const;
-		_iter& operator++();
-		bool operator!=(const _iter& other) const;
-	};
+    std::string operator*() const;
+    _iter &operator++();
+    bool operator!=(const _iter &other) const;
+  };
 
-	fiterator(const std::string &filename,const char& separator=' ');
+  fiterator(const std::string &filename, const char &separator = ' ');
 
-	_iter begin();
-	_iter end();
-	std::string next();
+  _iter begin();
+  _iter end();
+  std::string next();
 
-	char sep;
-	std::ifstream f;
+  char sep;
+  std::ifstream f;
 };
 
-std::vector<std::string> tokenize(const std::string &st,std::vector<char> separators={' '});
+std::vector<std::string> tokenize(const std::string &st,
+                                  std::vector<char> separators = {' '});
 
 #endif
