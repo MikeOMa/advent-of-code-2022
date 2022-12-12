@@ -1,6 +1,7 @@
 #include "day1.hpp"
 #include "day10.hpp"
 #include "day11.hpp"
+#include "day12.hpp"
 #include "day2.hpp"
 #include "day3.hpp"
 #include "day4.hpp"
@@ -11,7 +12,6 @@
 #include "day9.hpp"
 #include "util.hpp"
 #include <iostream>
-//#include"day12.hpp"
 //#include"day13.hpp"
 //#include"day14.hpp"
 //#include"day15.hpp"
@@ -84,7 +84,11 @@ int main(void) {
     d.firstStar();
     d.secondStar();
   }
-  //{day12 d;d.firstStar();d.secondStar();}
+  {
+    day12 d;
+    d.firstStar();
+    d.secondStar();
+  }
   //{day13 d;d.firstStar();d.secondStar();}
   //{day14 d;d.firstStar();d.secondStar();}
   //{day15 d;d.firstStar();d.secondStar();}
