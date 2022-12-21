@@ -96,11 +96,15 @@ int main(void) {
     //{day17 d;d.firstStar();d.secondStar();}
     //{day18 d;d.firstStar();d.secondStar();}
     //{day19 d;d.firstStar();d.secondStar();}
-    {day20 d;d.firstStar();d.secondStar();}
-   // {
-     //   day21 d;
-     //   d.firstStar();
-      //  d.secondStar();
+    {
+        day20 d;
+        d.firstStar();
+        d.secondStar();
+    }
+    // {
+    //   day21 d;
+    //   d.firstStar();
+    //  d.secondStar();
     //}
     //{day22 d;d.firstStar();d.secondStar();}
     //{day23 d;d.firstStar();d.secondStar();}

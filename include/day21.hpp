@@ -4,17 +4,17 @@
 #include "util.hpp"
 #include <algorithm>
 #include <bits/stdc++.h>
+#include <boost/math/tools/polynomial.hpp>
 #include <cctype>
 #include <cmath>
 #include <iostream>
 #include <sstream>
 #include <string>
 #include <vector>
-#include <boost/math/tools/polynomial.hpp>
 
 
 using namespace boost::math;
-using namespace boost::math::tools; // for polynomial
+using namespace boost::math::tools;// for polynomial
 using namespace std;
 using boost::lexical_cast;
 
@@ -31,11 +31,11 @@ struct day21 {
             } else if (s == '+') {
                 return x + y;
             } else if (s == '*') {
-                return x*y;
+                return x * y;
             } else {
-                    return x - y;
-                }
+                return x - y;
             }
+        }
 
         polydbl execute(polydbl x, polydbl y) {
             if (s == '/') {
@@ -43,11 +43,11 @@ struct day21 {
             } else if (s == '+') {
                 return x + y;
             } else if (s == '*') {
-                return x*y;
+                return x * y;
             } else {
                 return x - y;
-                }
             }
+        }
 
         monkeyOperation(char s) : s(s){};
 
@@ -96,13 +96,13 @@ struct day21 {
             if (s != "") {
                 auto data = tokenize(s);
                 string name = data[0].substr(0, 4);
-                if (data.size()>2){
+                if (data.size() > 2) {
                     auto op_str = data[2][0];
                     auto child_left = data[1];
                     auto child_right = data[3];
                     monkeyMap.insert({name, monkeyNode(name, child_left, child_right, op_str)});
                 }
-                if (data.size()==2){
+                if (data.size() == 2) {
                     auto num = stoi(data[1]);
                     monkeyMap.insert({name, monkeyNode(name, num)});
                 }
@@ -117,13 +117,13 @@ struct day21 {
     }
 
 
-    polydbl smartExecute(monkeyNode node){
-        if (node.name=="humn"){
+    polydbl smartExecute(monkeyNode node) {
+        if (node.name == "humn") {
             polydbl out({0, 1});
             return out;
         }
         if (node.isnum) {
-            polydbl out({(p2type)node.num, 0});
+            polydbl out({(p2type) node.num, 0});
             return out;
         } else {
             auto left_ans = smartExecute(monkeyMap.at(node.child_left));
@@ -142,7 +142,7 @@ struct day21 {
         // should be 21830569590923
         auto r = smartExecute(rightMonkey);
         // low 3327575724808
-        auto answer = ((r[0]-l[0])/l[1]);
+        auto answer = ((r[0] - l[0]) / l[1]);
         cout.precision(17);
         std::cout << "Twenty first day of Christmas: " << answer << std::endl;
     }
