@@ -13,23 +13,24 @@ using namespace std;
 
 struct fiterator {
 
-  struct _iter {
-    fiterator *src;
+    struct _iter {
+        fiterator *src;
 
-    std::string operator*() const;
-    _iter &operator++();
-    bool operator!=(const _iter &other) const;
-  };
+        std::string operator*() const;
+        _iter &operator++();
+        bool operator!=(const _iter &other) const;
+    };
 
-  fiterator(const std::string &filename, const char &separator = ' ');
+    fiterator(const std::string &filename, const char &separator = ' ');
 
-  _iter begin();
-  _iter end();
-  std::string next();
+    _iter begin();
+    _iter end();
+    std::string next();
 
-  char sep;
-  std::ifstream f;
+    char sep;
+    std::ifstream f;
 };
+
 
 std::vector<std::string> tokenize(const std::string &st,
                                   std::vector<char> separators = {' '});
