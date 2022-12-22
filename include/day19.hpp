@@ -109,7 +109,7 @@ struct day19 {
         // If the robots can't ever build the target we can prune it.
         bool prune = not checkRobots(blueprint[input.targetRobot], input.robots);
         // If the maxGeodes this branch could get is lower than the highest achieved;
-        prune = prune & (maxGeodes(input));
+        //prune = prune & (maxGeodes(input));// barely helps saves like 5 secs
         input.round += 1;
         input.resources = addVec(input.resources, input.robots);
         if ((input.round == input.steps) | prune) {
