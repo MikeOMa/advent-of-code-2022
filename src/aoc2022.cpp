@@ -18,7 +18,7 @@
 //#include"day16.hpp"
 //#include"day17.hpp"
 //#include"day18.hpp"
-//#include"day19.hpp"
+#include "day19.hpp"
 #include "day20.hpp"
 #include "day21.hpp"
 //#include"day22.hpp"
@@ -95,7 +95,11 @@ int main(void) {
     //{day16 d;d.firstStar();d.secondStar();}
     //{day17 d;d.firstStar();d.secondStar();}
     //{day18 d;d.firstStar();d.secondStar();}
-    //{day19 d;d.firstStar();d.secondStar();}
+    {
+        day19 d;
+        d.firstStar();
+        d.secondStar();
+    }
     {
         day20 d;
         d.firstStar();

@@ -25,7 +25,6 @@ struct day19 {
         int l1 = 5;
         vector<int> out = {0, 0, 0, 0};
         for (int i = l1; i < (d.size()); i += 3) {
-            cout << d[i + 1] << " " << d[i] << endl;
             out[ore2idx[d[i + 1]]] = stoi(d[i]);
         }
         return out;
@@ -98,11 +97,9 @@ struct day19 {
     int maxGeodes(simulationData input) {
         int n_res = input.resources[3];
         int n_robots = input.robots[3];
-        for (int i = 0; i < (input.steps - input.round); i++) {
-            n_res += n_res + n_robots;
-            n_robots += 1;
-        }
-        bool out = n_res <= highestGeodes;
+        int movesLeft = (input.steps - input.round);
+        auto endRes = n_res + movesLeft * n_robots + (movesLeft * (movesLeft - 1) / 2);
+        bool out = endRes < highestGeodes;
         return out;
     }
 
@@ -125,12 +122,29 @@ struct day19 {
             int bestScore = 0;
             input.robots[input.targetRobot] += 1;
             input.resources = subVec(input.resources, blueprint[input.targetRobot]);
+            auto canBuildGeode = checkIfBuildAble(input.resources, blueprint[3]);
             for (int targ = 0; targ < 4; targ++) {
-                auto copiedData = input;
-                copiedData.targetRobot = targ;
-                int score = simulationScore(copiedData, blueprint);
-                if (score > bestScore) {
-                    bestScore = score;
+                // If we have enough robots to make a geode every turn.
+                // Do not build another.
+                bool startBranch = false;
+                for (int other = 0; other < 4; other++) {
+                    startBranch = (blueprint[other][targ] > input.robots[targ]);
+                    if (startBranch) {
+                        break;
+                    }
+                }
+                if (canBuildGeode) {
+                    //if we can build a geode only start target 3
+                    startBranch = false;
+                }
+                if (startBranch | (targ == 3)) {
+                    counter += 1;
+                    auto copiedData = input;
+                    copiedData.targetRobot = targ;
+                    int score = simulationScore(copiedData, blueprint);
+                    if (score > bestScore) {
+                        bestScore = score;
+                    }
                 }
             }
             return bestScore;
@@ -144,6 +158,7 @@ struct day19 {
     void firstStar() {
         unsigned totalScore = 0;
         for (int i = 0; i < n; i++) {
+            highestGeodes = 0;
             auto blueprint = blueprints[i];
             int bestScore = 0;
             for (int rob = 0; rob < 4; rob++) {
@@ -154,7 +169,6 @@ struct day19 {
                     bestScore = x;
                 }
             }
-            cout << "score" << bestScore << endl;
             totalScore += (i + 1) * bestScore;
         }
         std::cout << "Nineteenth day of Christmas: " << totalScore << std::endl;
@@ -175,9 +189,7 @@ struct day19 {
                 if (x > bestScore) {
                     bestScore = x;
                 }
-                cout << " start i" << i << " : " << x << endl;
             }
-            cout << "score" << bestScore << endl;
             totalScore = totalScore * bestScore;
         }
         std::cout << "Nineteenth day of Christmas: " << totalScore << std::endl;
