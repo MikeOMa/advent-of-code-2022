@@ -114,9 +114,9 @@ struct day24 {
         vector<int> tmpCoords = {0, 0};
         int fromVrtxIdx = 0;
         vector<int> weights;
-        vector<vector<int>> Map = initialMap;
+        vector<vector<int>> Map;
         vector<vector<int>> checks = {{0, 0}, {1, 0}, {-1, 0}, {0, 1}, {0, -1}};
-        nTime = mapSize[0] * mapSize[1];
+        nTime = mapSize[0] * mapSize[1];// could change this to LCM maybe
         nStates = nTime + 2;
         for (int t_f = 0; t_f < nTime; t_f++) {
             int t = (t_f + 1) % nTime;
@@ -260,7 +260,6 @@ struct day24 {
         Vertex m_goal;
     };
     void firstStar() {
-        cout << "Time" << nTime << " N States" << nTime * (nTime + 2) << endl;
         std::vector<int> d(num_vertices(g_fow));
         std::vector<Vertex> p(num_vertices(g_fow));
         auto startIdx = 0;
@@ -268,7 +267,6 @@ struct day24 {
         Vertex l = startIdx;
         Vertex e = endIdx;
         vector<int> distances;
-        cout << "number of edges" << boost::num_edges(g_fow) << endl;
 
 
         auto goalLoc = mapSize;
