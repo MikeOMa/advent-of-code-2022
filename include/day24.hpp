@@ -116,8 +116,8 @@ struct day24 {
         vector<int> weights;
         vector<vector<int>> Map;
         vector<vector<int>> checks = {{0, 0}, {1, 0}, {-1, 0}, {0, 1}, {0, -1}};
-        nTime = mapSize[0] * mapSize[1];// could change this to LCM maybe
-        nStates = nTime + 2;
+        nTime = lcm(mapSize[0], mapSize[1]);// could change this to LCM maybe
+        nStates = mapSize[0] * mapSize[1] + 2;
         for (int t_f = 0; t_f < nTime; t_f++) {
             int t = (t_f + 1) % nTime;
             Map = initialMap;
@@ -276,7 +276,14 @@ struct day24 {
                                 distance_heuristic<Graph, int>(goalLoc, mapSize, nStates),
                                 boost::predecessor_map(&p[0]).distance_map(&d[0]).visitor(astar_goal_visitor<Vertex>(e)));
         } catch (found_goal fg) {// found a path to the goal
+            list<Vertex> shortest_path;
+            for (Vertex v = e;; v = p[v]) {
+                shortest_path.push_front(v);
+                if (p[v] == v)
+                    break;
+            }
         }
+
         p1Ans = d[e];
         std::cout << "TwentyFourth day of Christmas: " << p1Ans << std::endl;
     }
