@@ -2,6 +2,7 @@
 #include "day10.hpp"
 #include "day11.hpp"
 #include "day12.hpp"
+#include "day13.hpp"
 #include "day2.hpp"
 #include "day3.hpp"
 #include "day4.hpp"
@@ -12,10 +13,9 @@
 #include "day9.hpp"
 #include "util.hpp"
 #include <iostream>
-//#include"day13.hpp"
 //#include"day14.hpp"
 //#include"day15.hpp"
-//#include"day16.hpp"
+#include "day16.hpp"
 //#include"day17.hpp"
 //#include"day18.hpp"
 #include "day19.hpp"
@@ -24,7 +24,7 @@
 #include "day22.hpp"
 #include "day23.hpp"
 #include "day24.hpp"
-//#include"day25.hpp"
+#include "day25.hpp"
 
 using namespace std;
 
@@ -93,7 +93,11 @@ int main(void) {
     //{day13 d;d.firstStar();d.secondStar();}
     //{day14 d;d.firstStar();d.secondStar();}
     //{day15 d;d.firstStar();d.secondStar();}
-    //{day16 d;d.firstStar();d.secondStar();}
+    {
+        day16 d;
+        d.firstStar();
+        d.secondStar();
+    }
     //{day17 d;d.firstStar();d.secondStar();}
     //{day18 d;d.firstStar();d.secondStar();}
     /*{
@@ -116,11 +120,15 @@ int main(void) {
         d.firstStar();
         d.secondStar();
     }
-    {day23 d;d.firstStar();d.secondStar();}*/
+    {day23 d;d.firstStar();d.secondStar();}
     {
         day24 d;
         d.firstStar();
         d.secondStar();
+    }*/
+    {
+        day25 d;
+        d.firstStar();
+        d.secondStar();
     }
-    //{day25 d;d.firstStar();d.secondStar();}*/
 }
