@@ -106,13 +106,13 @@ struct day16 {
         int n = 1;
         simState(vector<long> flows, int pos) : flows(flows) {
             position.push_back(pos);
-            for (auto i: flows) {
+            for (int i = 0; i < flows.size(); i++) {
                 pipes.push_back(0);
                 isopen.push_back(false);
             }
         }
         simState(vector<long> flows, int pos, int players) : flows(flows), position({pos}), n(players) {
-            for (auto i: flows) {
+            for (int i = 0; i < flows.size(); i++) {
                 pipes.push_back(0);
                 isopen.push_back(false);
             }
