@@ -90,16 +90,41 @@ struct day19 {
         int steps = 24;
         simulationData(){};
         simulationData(int robot) : targetRobot(robot){};
+        vector<int> hash() {
+            vector<int> x;
+            for (int i = 0; i < 3; i++) {
+                x.push_back(resources[i]);
+            }
+            for (int i = 0; i < 4; i++) {
+                x.push_back(robots[i]);
+            }
+            x.push_back(round);
+            return x;
+        }
+        int doNothingScore() {
+            return robots[3] * (steps - round) + resources[3];
+        }
+
+        int highestPossible() {
+            int doNothing = doNothingScore();
+            int roundsLeft = (steps - round);
+            int rem = roundsLeft * (roundsLeft - 1) / 2;
+            return doNothing + rem;
+        }
     };
     long long counter = 0;
     int highestGeodes = 0;
 
     int maxGeodes(simulationData &input) {
+        /*
         int n_res = input.resources[3];
         int n_robots = input.robots[3];
         int movesLeft = (input.steps - input.round);
         auto endRes = n_res + movesLeft * n_robots + (movesLeft * (movesLeft - 1) / 2);
+         */
+        int endRes = input.highestPossible();
         bool out = endRes < highestGeodes;
+
         return out;
     }
 
@@ -107,9 +132,11 @@ struct day19 {
         auto resourcesAtStart = input.resources;
         bool canBuild = checkIfBuildAble(resourcesAtStart, blueprint[input.targetRobot]);
         // If the robots can't ever build the target we can prune it.
-        bool prune = not checkRobots(blueprint[input.targetRobot], input.robots);
         // If the maxGeodes this branch could get is lower than the highest achieved;
-        //prune = prune & (maxGeodes(input));// barely helps saves like 5 secs
+        bool prune = not checkRobots(blueprint[input.targetRobot], input.robots);
+        if (canBuild) {
+            prune = (prune) | (maxGeodes(input));
+        }
         input.round += 1;
         input.resources = addVec(input.resources, input.robots);
         if ((input.round == input.steps) | prune) {
@@ -171,9 +198,9 @@ struct day19 {
             }
             totalScore += (i + 1) * bestScore;
         }
+        assert(totalScore == 1264);
         std::cout << "Nineteenth day of Christmas: " << totalScore << std::endl;
     }
-
     void secondStar() {
         unsigned totalScore = 1;
         counter = 0;
@@ -192,6 +219,7 @@ struct day19 {
             }
             totalScore = totalScore * bestScore;
         }
+        assert(totalScore == 13475);
         std::cout << "Nineteenth day of Christmas: " << totalScore << std::endl;
     }
 };

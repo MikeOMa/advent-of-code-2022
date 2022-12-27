@@ -99,7 +99,7 @@ struct day17 {
         }
     };
     int p1 = 0;
-    int findHighestPoint(rockMap x) {
+    int findHighestPoint(rockMap &x) {
         if (x.size() == 0) {
             return -1;
         }
@@ -177,7 +177,7 @@ struct day17 {
         }
         return out;
     }
-    hashedState hashState(rockMap map, int n, int turn) {
+    hashedState hashState(rockMap &map, int n, int turn) {
         vector<int> out;
         out.push_back(streamIdx);
         out.push_back(turn % 5);
@@ -197,7 +197,7 @@ struct day17 {
         }
         return out;
     }
-    bool vecContains(vector<hashedState> vec, hashedState key) {
+    bool vecContains(vector<hashedState> &vec, hashedState key) {
         return (find(vec.begin(), vec.end(), key) != vec.end());
     }
     void secondStar() {
