@@ -90,7 +90,7 @@ struct day14 {
             }
         }
     }
-    coord dropSand(vector<vector<int>> Map) {
+    coord dropSand(vector<vector<int>> &Map) {
         coord pos = {0, 500};
         for (int i = 0; i < (xrange.second - 1); i++) {
             auto nextRow = Map[pos.first + 1];

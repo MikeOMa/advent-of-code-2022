@@ -64,14 +64,14 @@ struct day19 {
         }
         cout << endl;
     }
-    bool checkIfBuildAble(vector<int> resources, vector<int> req) {
+    bool checkIfBuildAble(vector<int> &resources, vector<int> &req) {
         bool out = true;
         for (int i = 0; i < resources.size(); i++) {
             out = out & (resources[i] >= req[i]);
         }
         return out;
     }
-    bool checkRobots(vector<int> req, vector<int> robots) {
+    bool checkRobots(vector<int> &req, vector<int> &robots) {
         //check if the component will be buildable in future
         bool out = true;
         for (int i = 0; i < req.size(); i++) {
@@ -94,7 +94,7 @@ struct day19 {
     long long counter = 0;
     int highestGeodes = 0;
 
-    int maxGeodes(simulationData input) {
+    int maxGeodes(simulationData &input) {
         int n_res = input.resources[3];
         int n_robots = input.robots[3];
         int movesLeft = (input.steps - input.round);
@@ -103,7 +103,7 @@ struct day19 {
         return out;
     }
 
-    int simulationScore(simulationData input, vector<vector<int>> blueprint) {
+    int simulationScore(simulationData &input, vector<vector<int>> &blueprint) {
         auto resourcesAtStart = input.resources;
         bool canBuild = checkIfBuildAble(resourcesAtStart, blueprint[input.targetRobot]);
         // If the robots can't ever build the target we can prune it.

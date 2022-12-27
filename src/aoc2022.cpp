@@ -29,23 +29,15 @@
 
 using namespace std;
 
+
 typedef std::chrono::duration<float> fsec;
+typedef chrono::time_point<std::chrono::system_clock> time_typ;
+typedef std::chrono::system_clock Time;
+
 void appendLine(int dayCount, ofstream *myfile, fsec p1) {
     *myfile << "|" << dayCount << "|" << p1.count() << "|" << endl;
 }
 int main(void) {
-    typedef chrono::time_point<std::chrono::system_clock> time_t;
-    typedef std::chrono::system_clock Time;
-    struct timer {
-        time_t t;
-        timer() { t = Time::now(); };
-        fsec getIncrement() {
-            time_t tnow = Time::now();
-            fsec delta = tnow - t;
-            t = tnow;
-            return delta;
-        }
-    };
     ofstream myfile;
     myfile.open("times.md");
     myfile << "| Day | time |" << endl;
@@ -211,9 +203,9 @@ int main(void) {
         d.firstStar();
         d.secondStar();
     }
-
     dayCount++;
     appendLine(dayCount, &myfile, t.getIncrement());
+
     {
         day23 d;
         d.firstStar();

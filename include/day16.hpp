@@ -145,7 +145,7 @@ struct day16 {
             }
         }
     };
-    vector<pair<int, int>> getCandidates(simState sim, int maxt, int idx = 0) {
+    vector<pair<int, int>> getCandidates(simState &sim, int maxt, int idx = 0) {
         vector<pair<int, int>> out;
         auto Drow = pairwiseDists[sim.position[idx]];
         for (int j = 0; j < Drow.size(); j++) {
@@ -162,7 +162,7 @@ struct day16 {
     long highestScore = 0;
 
     simState bestSim;
-    long TreeSearch1(simState sim, int maxt = 30) {
+    long TreeSearch1(simState &sim, int maxt = 30) {
         if (sim.time == maxt) {
             if (sim.score > highestScore) {
                 bestSim = sim;
@@ -236,7 +236,6 @@ struct day16 {
     void secondStar() {
         auto initialState = simState(pipeflows_vec, valve2idx.at("AA"), 2);
         bestSim = simState();
-        cout << initialState.position.size() << endl;
         auto out = TreeSearch1(initialState, 26);
         //2778 too low;
         std::cout << "Sixteenth Day of Christmas: " << out << std::endl;
