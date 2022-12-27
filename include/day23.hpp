@@ -20,7 +20,7 @@ typedef set<pair<int, int>> elfSet;
 struct day23 {
     elfArr initialElfLoc;
     const vector<int> pm1 = {-1, 0, 1};
-
+    timer t;
     struct dirSearch {
         complex<int> constant;
         complex<int> multi;
@@ -74,9 +74,6 @@ struct day23 {
             }
         }
     };
-    bool contains(ArrSet x, coord y) {
-        return x.s.contains(y);
-    }
     void printArr(elfArr l) {
         auto size = getMaxes(l);
         for (int i = size[0]; i <= size[1]; i++) {
@@ -96,14 +93,14 @@ struct day23 {
         auto out = k != x.end();
         return out;
     }
-    bool anySurroundings(coord x, ArrSet y) {
+    bool anySurroundings(coord x, ArrSet &y) {
         bool out = false;
         for (int i: {-1, 0, 1}) {
             for (int j: {-1, 0, 1}) {
                 auto newProposal = addCoord(x, {i, j});
                 if (not((i == 0) & (j == 0))) {
-                    auto flag = contains(y, {newProposal});
-                    out = out | flag;
+                    auto flag = y.s.contains(newProposal);
+                    out = flag;
                     if (out) {
                         break;
                     }
@@ -116,12 +113,12 @@ struct day23 {
         return out;
     }
 
-    bool checkDirection(ArrSet elfs, coord x, dirSearch y) {
+    bool checkDirection(ArrSet &elfs, coord x, dirSearch y) {
         // return false if nothing is found
         bool out = false;
         for (auto i: y.searchspace) {
             coord trial = {i.real() + x.first, i.imag() + x.second};
-            out = out | contains(elfs, trial);
+            out = elfs.s.contains(trial);
             if (out) {
                 break;
             }
@@ -130,11 +127,10 @@ struct day23 {
     }
 
 
-    elfArr buildProposal(ArrSet elfs, int turn_number) {
+    elfArr buildProposal(ArrSet &elfs, int turn_number) {
         elfArr proposal = {};
         auto start = turn_number % 4;
-        for (int i = 0; i < elfs.arr.size(); i++) {
-            auto elf = elfs.arr[i];
+        for (auto elf: elfs.arr) {
             if (not anySurroundings(elf, elfs)) {
                 proposal.push_back(elf);
             } else {
@@ -157,21 +153,31 @@ struct day23 {
         }
         return proposal;
     }
-
-    elfArr pruneProposal(ArrSet elfs, elfArr proposal) {
+    typedef long hshCoord;
+    hshCoord c2s(coord x) {
+        /*stringstream s;
+        s << x.first << "_" << x.second << endl;
+        return s.str();
+         */
+        return x.first + 100000 * x.second;
+    }
+    elfArr pruneProposal(ArrSet &elfs, elfArr &proposal) {
         //check if all moves do not overlap;
         elfArr newProposal = proposal;
-        set<coord> proposalSet = {};
-        set<coord> duplicates = {};
+        unordered_set<hshCoord> proposalSet = {};
+        unordered_set<hshCoord> duplicates = {};
+
         for (auto i: proposal) {
-            if (not proposalSet.contains(i)) {
-                proposalSet.insert(i);
+            auto hashedCoord = c2s(i);
+            if (not proposalSet.contains(hashedCoord)) {
+                proposalSet.insert(hashedCoord);
             } else {
-                duplicates.insert(i);
+                duplicates.insert(hashedCoord);
             }
         }
         for (int i = 0; i < elfs.arr.size(); i++) {
-            if (duplicates.contains(proposal[i])) {
+            auto hashedCoord = c2s(proposal[i]);
+            if (duplicates.contains(hashedCoord)) {
                 newProposal[i] = elfs.arr[i];
             }
         }
@@ -199,7 +205,7 @@ struct day23 {
         int out = spaces - x.size();
         return out;
     }
-    bool checkProposalIsNone(elfArr proposal, elfArr elfs) {
+    bool checkProposalIsNone(elfArr &proposal, elfArr &elfs) {
         bool out = true;
         for (int i = 0; i < elfs.size(); i++) {
             out = out & (proposal[i] == elfs[i]);
@@ -214,7 +220,7 @@ struct day23 {
         for (int i = 0; i < 10; i++) {
             auto proposal = buildProposal(elfConfig, i);
             auto prunedProposal = pruneProposal(elfConfig, proposal);
-            elfConfig = prunedProposal;
+            elfConfig = ArrSet(prunedProposal);
         }
         int totalScore = calculateScore(elfConfig.arr);
         std::cout << "TwentyThird day of Christmas: " << totalScore << std::endl;

@@ -11,6 +11,25 @@
 
 using namespace std;
 
+typedef std::chrono::duration<float> fsec;
+typedef chrono::time_point<std::chrono::system_clock> time_typ;
+typedef std::chrono::system_clock Time;
+struct timer {
+    time_typ t;
+    timer() { t = Time::now(); };
+    fsec getIncrement() {
+        time_typ tnow = Time::now();
+        fsec delta = tnow - t;
+        t = tnow;
+        return delta;
+    }
+
+    void print() {
+        auto x = getIncrement();
+        cout << "time " << x.count() << endl;
+    }
+};
+
 struct fiterator {
 
     struct _iter {
