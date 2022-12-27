@@ -145,16 +145,38 @@ struct day16 {
             }
         }
     };
+    template<typename T>
+    vector<size_t> sort_indexes(const vector<T> &v) {
+
+        // initialize original index locations
+        vector<size_t> idx(v.size());
+        iota(idx.begin(), idx.end(), 0);
+
+        // sort indexes based on comparing values in v
+        // using std::stable_sort instead of std::sort
+        // to avoid unnecessary index re-orderings
+        // when v contains elements of equal values
+        stable_sort(idx.begin(), idx.end(),
+                    [&v](size_t i1, size_t i2) { return v[i1] < v[i2]; });
+
+        return idx;
+    }
+
     vector<pair<int, int>> getCandidates(simState &sim, int maxt, int idx = 0) {
         vector<pair<int, int>> out;
         auto Drow = pairwiseDists[sim.position[idx]];
-        for (int j = 0; j < Drow.size(); j++) {
+        auto sortedEl = sort_indexes(Drow);
+        int n_el = 0;
+        for (auto j: sortedEl) {
             auto val = Drow[j];
             bool open = sim.isopen[j];
             int timeleft = maxt - sim.time;
-
             if ((not open) & (sim.flows[j] > 0) & (timeleft > val)) {
                 out.push_back({val, j});
+                n_el += 1;
+            }
+            if (n_el == 3) {
+                break;
             }
         }
         return out;
@@ -230,6 +252,7 @@ struct day16 {
     void firstStar() {
         auto initialState = simState(pipeflows_vec, valve2idx.at("AA"));
         auto out = TreeSearch1(initialState);
+        assert(out == 2265);
         std::cout << "Sixteenth day of Christmas: " << out << std::endl;
     }
 
@@ -238,6 +261,7 @@ struct day16 {
         bestSim = simState();
         auto out = TreeSearch1(initialState, 26);
         //2778 too low;
+        assert(out == 2811);
         std::cout << "Sixteenth Day of Christmas: " << out << std::endl;
     }
 };
