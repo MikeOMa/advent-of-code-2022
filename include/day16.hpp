@@ -169,10 +169,6 @@ struct day16 {
             }
             return sim.score;
         }
-        /*if (sim.maxPotential(pipeflows_vec, maxt)<highestScore){
-            cout << "prune" << sim.time << endl;
-            return sim.score;
-        }*/
 
         vector<bool> checkIdle;
         for (auto i: sim.timeToTarget) {
@@ -242,7 +238,6 @@ struct day16 {
         bestSim = simState();
         cout << initialState.position.size() << endl;
         auto out = TreeSearch1(initialState, 26);
-        cout << "O VENTS" << endl;
         for (auto i: bestSim.openvents) {
             cout << i << endl;
         }

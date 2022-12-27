@@ -91,7 +91,6 @@ struct day15 {
         long totalScore = 0;
         long row = 2000000;
         //long row=10;
-        cout << yrange.first << " " << yrange.second << endl;
         for (long i = yrange.first; i <= yrange.second; i++) {
             coord check = {row, i};
             if (not beaconsset.contains(check)) {

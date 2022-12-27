@@ -70,7 +70,6 @@ struct day18 {
         }
         n_vert = (int) verts.size();
         g = Graph(n_vert);
-        cout << n_vert << " " << edges.size() << endl;
         for (int i = 0; i < ((int) (edges.size())); ++i) {
             boost::add_edge(edges[i].first, edges[i].second, 1, g);
         }
@@ -82,7 +81,6 @@ struct day18 {
             pairwiseD.push_back(tmp);
         }
         boost::johnson_all_pairs_shortest_paths(g, pairwiseD);
-        cout << boost::num_vertices(g) << endl;
     }
 
     vector<int> pm = {-1, 1};
@@ -108,7 +106,6 @@ struct day18 {
                 droplet up = x;
                 up[idx] += i;
                 if (not lavaSet.contains(up)) {
-                    cout << pairwiseD[0][stateMap.at(up)] << endl;
                     if (pairwiseD[0][stateMap.at(up)] < (n_vert)) {
                         sides += 1;
                     }
@@ -143,7 +140,7 @@ struct day18 {
             totalScore += countFreeEdge(i);
         }
         //6069 too high;
-        std::cout << "Third day of Christmas: " << totalScore << std::endl;
+        std::cout << "Eighteenth day of Christmas: " << totalScore << std::endl;
     }
 
     void secondStar() {
@@ -151,12 +148,8 @@ struct day18 {
         for (auto i: lava) {
             totalScore += countFreeEdge2(i);
         }
-        int idx = stateMap.at({2, 2, 5});
-        cout << pairwiseD[0][idx] << endl;
-        idx = stateMap.at({0, 0, 1});
-        cout << pairwiseD[0][idx] << endl;
 
-        std::cout << "Third Day of Christmas: " << totalScore << std::endl;
+        std::cout << "Eighteenth Day of Christmas: " << totalScore << std::endl;
     }
 };
 
