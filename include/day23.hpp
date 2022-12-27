@@ -79,7 +79,6 @@ struct day23 {
     }
     void printArr(elfArr l) {
         auto size = getMaxes(l);
-        cout << size[2] << size[3] << endl;
         for (int i = size[0]; i <= size[1]; i++) {
             for (int j = size[2]; j <= size[3]; j++) {
                 if (contains(l, {i, j})) {
@@ -212,7 +211,6 @@ struct day23 {
     }
     void firstStar() {
         ArrSet elfConfig = {initialElfLoc};
-        cout << calculateScore(elfConfig.arr) << endl;
         for (int i = 0; i < 10; i++) {
             auto proposal = buildProposal(elfConfig, i);
             auto prunedProposal = pruneProposal(elfConfig, proposal);
@@ -225,7 +223,6 @@ struct day23 {
     void secondStar() {
         int totalScore = 0;
         ArrSet elfConfig = {initialElfLoc};
-        cout << calculateScore(elfConfig.arr) << endl;
         for (int i = 0; i < 2000; i++) {
             totalScore = i;
             auto proposal = buildProposal(elfConfig, i);
@@ -234,7 +231,6 @@ struct day23 {
                 break;
             }
             elfConfig = ArrSet(prunedProposal);
-            cout << i << endl;
         }
         std::cout << "TwentyThird day of Christmas: " << totalScore << std::endl;
     }

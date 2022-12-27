@@ -238,9 +238,6 @@ struct day16 {
         bestSim = simState();
         cout << initialState.position.size() << endl;
         auto out = TreeSearch1(initialState, 26);
-        for (auto i: bestSim.openvents) {
-            cout << i << endl;
-        }
         //2778 too low;
         std::cout << "Sixteenth Day of Christmas: " << out << std::endl;
     }

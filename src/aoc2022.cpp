@@ -24,127 +24,219 @@
 #include "day8.hpp"
 #include "day9.hpp"
 #include "util.hpp"
+#include <chrono>
 #include <iostream>
 
 using namespace std;
 
+typedef std::chrono::duration<float> fsec;
+void appendLine(int dayCount, ofstream *myfile, fsec p1) {
+    *myfile << "|" << dayCount << "|" << p1.count() << "|" << endl;
+}
 int main(void) {
-
+    typedef chrono::time_point<std::chrono::system_clock> time_t;
+    typedef std::chrono::system_clock Time;
+    struct timer {
+        time_t t;
+        timer() { t = Time::now(); };
+        fsec getIncrement() {
+            time_t tnow = Time::now();
+            fsec delta = tnow - t;
+            t = tnow;
+            return delta;
+        }
+    };
+    ofstream myfile;
+    myfile.open("times.md");
+    myfile << "| Day | time |" << endl;
+    myfile << "|--- | --- |" << endl;
+    int dayCount = 0;
+    auto t = timer();
     {
         day1 d;
         d.firstStar();
         d.secondStar();
     }
+    dayCount++;
+    appendLine(dayCount, &myfile, t.getIncrement());
     {
         day2 d;
         d.firstStar();
         d.secondStar();
     }
+    dayCount++;
+    appendLine(dayCount, &myfile, t.getIncrement());
     {
         day3 d;
         d.firstStar();
         d.secondStar();
     }
+    dayCount++;
+    appendLine(dayCount, &myfile, t.getIncrement());
     {
         day4 d;
         d.firstStar();
         d.secondStar();
     }
+
+    dayCount++;
+    appendLine(dayCount, &myfile, t.getIncrement());
+
     {
         day5 d;
         d.firstStar();
         d.secondStar();
     }
+    dayCount++;
+    appendLine(dayCount, &myfile, t.getIncrement());
     {
         day6 d;
         d.firstStar();
         d.secondStar();
     }
+    dayCount++;
+    appendLine(dayCount, &myfile, t.getIncrement());
     {
         day7 d;
         d.firstStar();
         d.secondStar();
     }
+    dayCount++;
+    appendLine(dayCount, &myfile, t.getIncrement());
     {
         day8 d;
         d.firstStar();
         d.secondStar();
     }
+    dayCount++;
+    appendLine(dayCount, &myfile, t.getIncrement());
     {
         day9 d;
         d.firstStar();
         d.secondStar();
     }
+    dayCount++;
+    appendLine(dayCount, &myfile, t.getIncrement());
     {
         day10 d;
         d.secondStar();
     }
+    dayCount++;
+    appendLine(dayCount, &myfile, t.getIncrement());
     {
         day11 d;
         d.firstStar();
         d.secondStar();
     }
+    dayCount++;
+    appendLine(dayCount, &myfile, t.getIncrement());
     {
         day12 d;
         d.firstStar();
         d.secondStar();
     }
+    dayCount++;
+    appendLine(dayCount, &myfile, t.getIncrement());
     {
         day13 d;
         d.firstStar();
         d.secondStar();
     }
+    dayCount++;
+    appendLine(dayCount, &myfile, t.getIncrement());
     {
         day14 d;
         d.firstStar();
         d.secondStar();
     }
+    dayCount++;
+    appendLine(dayCount, &myfile, t.getIncrement());
     {
         day15 d;
         d.firstStar();
         d.secondStar();
     }
-    /*{
+    dayCount++;
+    appendLine(dayCount, &myfile, t.getIncrement());
+    {
         day16 d;
         d.firstStar();
         d.secondStar();
     }
+
+    dayCount++;
+    appendLine(dayCount, &myfile, t.getIncrement());
     {
         day17 d;
         d.firstStar();
         d.secondStar();
     }
-    {day18 d;d.firstStar();
-     d.secondStar();}
+
+    dayCount++;
+    appendLine(dayCount, &myfile, t.getIncrement());
+    {
+        day18 d;
+        d.firstStar();
+        d.secondStar();
+    }
+
+    dayCount++;
+    appendLine(dayCount, &myfile, t.getIncrement());
     {
         day19 d;
         d.firstStar();
         d.secondStar();
     }
+
+    dayCount++;
+    appendLine(dayCount, &myfile, t.getIncrement());
     {
         day20 d;
         d.firstStar();
         d.secondStar();
     }
-     {
-       day21 d;
-       d.firstStar();
-      d.secondStar();
+
+    dayCount++;
+    appendLine(dayCount, &myfile, t.getIncrement());
+    {
+        day21 d;
+        d.firstStar();
+        d.secondStar();
     }
-     {
+
+    dayCount++;
+    appendLine(dayCount, &myfile, t.getIncrement());
+    {
         day22 d;
         d.firstStar();
         d.secondStar();
     }
-    {day23 d;d.firstStar();d.secondStar();}
+
+    dayCount++;
+    appendLine(dayCount, &myfile, t.getIncrement());
+    {
+        day23 d;
+        d.firstStar();
+        d.secondStar();
+    }
+
+    dayCount++;
+    appendLine(dayCount, &myfile, t.getIncrement());
     {
         day24 d;
         d.firstStar();
         d.secondStar();
     }
+
+    dayCount++;
+    appendLine(dayCount, &myfile, t.getIncrement());
     {
         day25 d;
         d.firstStar();
         d.secondStar();
-    }*/
+    }
+    dayCount++;
+    appendLine(dayCount, &myfile, t.getIncrement());
+
+    myfile.close();
 }
